@@ -1,0 +1,42 @@
+train_count: 1
+seed: 1337
+dataset:
+  - dbscreen_40s
+  - wddd
+
+models:
+  input_channel: 1
+  output_channel: 2
+  image_size: 256
+  model:
+    model_name: co_detection_cnn
+    dataset_type: constant # or random or same
+    up_method: upsample
+    up_mode: nearest
+    train_n: 1
+    augment_identical: true
+    n_range: None
+  set_init: true
+optimizer:
+  optimizer_name: adam
+  learning_rate_g: 0.001
+  learning_rate_f: 0.001
+  weight_decay: 0.0005
+  betas:
+  - 0.99
+  - 0.999
+  eps: 1.0e-08
+model_g_filename: model_g.pt
+model_f1_filename: model_f1.pt
+model_f2_filename: model_f2.pt
+
+palette: [
+  [ 0, 0, 0 ],
+  [ 255, 255, 255 ],
+]
+
+train:
+  batch_size: 5
+  num_iter: 8
+  num_epochs: 500
+  num_k: 3
